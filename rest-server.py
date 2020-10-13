@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 ##
 ## Sample Flask REST server implementing two methods
 ##

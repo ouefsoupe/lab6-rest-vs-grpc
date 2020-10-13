@@ -37,7 +37,9 @@ For the first test, you should run the server and client code on the same host, 
 
 For the second test, you should run the server and client on different hosts within the same zone. You should find that the REST code takes about the same time as the localhost implementation.
 
-For the third test, you should create a new server in the `europe-west3-a` zone (Frankfurt) and test the client/server speed. You may need to adjust the numbe of repitions you measure based on the latency you encounter). You'll find that the REST add api takes ~270ms rather than 2ms. You may need to adjust the number of repititions you do to keep the running time managable (do at least 100 resp).
+For the third test, you should run the server and client on different hosts within the same region but a different zone (e.g. us-west1-b ). You should find that the REST code takes about the same time as the localhost implementation but will be a little slower.
+
+For the fouth test, you should create a new server in the `europe-west3-a` zone (Frankfurt) and test the client/server speed. You may need to adjust the numbe of repitions you measure based on the latency you encounter). You'll find that the REST add api takes ~270ms rather than 2ms. You may need to adjust the number of repititions you do to keep the running time managable (do at least 100 resp).
 
 In each case, you should use the **internal IP address** rather than than the external IP address for the hosts (i.e. a 10.x.y.z address)
 
@@ -46,13 +48,13 @@ Then, repeat the same three measurements using the gRPC method.
 When you're done, edit a file `SOLUTION.md` that includes a table showing the time per-method for each of the RPC mechanisms as below.
 
 
-|  Method 	| Local  	| Same-Zone  	|  Different Region 	|
-|---	|---	|---	|---	|---	|
-|   REST add	|   	|   	|   	|
-|   gRPC add	|   	|   	|   	|
+|  Method 	| Local  	| Same-Zone  	|  SameReg/Diff Zone 	| Europe |
+|---------- |---------- |-------------- |-----------------------|--------|
+|   REST add	|   	|   	|  	|
+|   gRPC add	|   	|   	|    	|
 |   REST img	|   	|   	|   	|
-|   gRPC img	|   	|   	|   	|
-|   PING    |       |       |       |
+|   gRPC img	|       |   	|   	|
+|   PING        |       |      |       |
 You should measure the basic latency  using the `ping` command - this can be construed to be the latency without any RPC or python overhead.
 
 You should examine your results and provide a short paragraph with your observations of the performance difference between REST and gRPC as described in `SOLUTIONS.md`.

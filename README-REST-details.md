@@ -16,7 +16,7 @@ You'll also need to add support for taking the IP address from the command line 
 
 You'll need to install some Python libraries in addition to the flask libraries installed in lab5. This command install the stuff I needed:
 ```
-sudo pip3 install pillow jsonpickle
+sudo pip3 install pillow jsonpickle flask
 ```
 
 #### What you need to do for the Python section

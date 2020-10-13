@@ -1,6 +1,6 @@
 
-|  Method 	| Local  	| Same-Zone  	|  Different Region 	|
-|---	|---	|---	|---	|---	|
+|  Method 	| Local  	| Same-Zone  	|  SameReg/Diff Zone 	| Europe |
+|---------- |---------- |-------------- |-----------------------|--------|
 |   REST add	|   	|   	|  	|
 |   gRPC add	|   	|   	|    	|
 |   REST img	|   	|   	|   	|
