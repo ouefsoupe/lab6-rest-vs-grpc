@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 ##
 ## Sample Flask REST server implementing two methods
 ##
@@ -13,17 +14,26 @@
 ##
 from flask import Flask, request, Response
 import jsonpickle
-import numpy as np
 from PIL import Image
+import base64
 import io
 
 # Initialize the Flask application
 app = Flask(__name__)
 
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.DEBUG)
+
+@app.route('/api/add/<int:a>/<int:b>', methods=['GET', 'POST'])
+def add(a,b):
+    response = {'sum' : str( a + b)}
+    response_pickled = jsonpickle.encode(response)
+    return Response(response=response_pickled, status=200, mimetype="application/json")
 
 # route http posts to this method
-@app.route('/api/image', methods=['POST'])
-def test():
+@app.route('/api/rawimage', methods=['POST'])
+def rawimage():
     r = request
     # convert the data to a PIL image type so we can extract dimensions
     try:
@@ -41,6 +51,14 @@ def test():
 
     return Response(response=response_pickled, status=200, mimetype="application/json")
 
+@app.route('/api/dotproduct', methods=['POST'])
+def dotproduct():
+    pass
+
+# route http posts to this method
+@app.route('/api/jsonimage', methods=['POST'])
+def jsonimage():
+    pass
 
 # start flask app
 app.run(host="0.0.0.0", port=5000)

@@ -8,9 +8,11 @@ sudo apt install protobuf-compiler
 sudo pip3 install grpcio-tools
 ```
 
+You should be able to do all of your development on the Google Cloud Console or your laptop.
+
 #### What you need to do for the gRPC section
 
-You need to build a gRPC service that implements an `add` and `image` message and has the same functionality as the REST implementation.
+You need to build a gRPC service that implements the `add`, `rawimage` and `sum` messages and has the same functionality as the REST implementation. Protocol Buffers lets you provide binary data, but just for consistency we're going to have you implement `jsonimage` as well.
 
 The reference implementation used these types:
 ```
@@ -19,8 +21,30 @@ message addMsg {
   int32 b = 2;
 }
 
-message imageMsg {
+message rawImageMsg {
     bytes img=1;
+}
+
+message dotProductMsg {
+    repeated float a = 1;
+    repeated float b = 2;
+  }
+  
+message jsonImageMsg {
+      string img=1;
+  }
+
+message addReply {
+    int32 sum = 1;
+}
+
+message dotProductReply {
+    float dotproduct = 1;
+}
+
+message imageReply {
+    int32 width=1;
+    int32 height=2;
 }
 ```
 
@@ -30,7 +54,7 @@ The `bytes` type can be used to transport an array of bytes. The corresponding c
     data = lab6_pb2.imageMsg(img=img)
 ```
 
-You should implement the `add` service first -- that will walk you through the basic steps of creating a `protobuf` specification and geneating the code. After that, you should add the `image` endpoint. You can transport the image using the `bytes` designation.
+You should implement the `dotproduct` service first -- that will walk you through the basic steps of creating a `protobuf` specification and generating the code. After that, you should add the `jsonimage` endpoint. You can transport the image using the `string` designation.
 
 You may see warning in the protocol buffer tutorial that protocol buffers (and gRPC) really aren't designed to transport large messages, but it will work fine for this lab.
 
