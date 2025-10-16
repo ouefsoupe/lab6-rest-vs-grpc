@@ -1,0 +1,19 @@
+syntax = "proto3";
+package lab6;
+
+service Lab6 {
+  rpc Add        (AddRequest)        returns (AddReply);
+  rpc RawImage   (ImageRequest)      returns (ImageReply);
+  rpc DotProduct (DotRequest)        returns (DotReply);
+  rpc JsonImage  (JsonImageRequest)  returns (ImageReply);
+}
+
+message AddRequest { int64 a = 1; int64 b = 2; }
+message AddReply   { int64 sum = 1; }
+
+message ImageRequest     { bytes image = 1; }           // raw JPG/PNG bytes
+message JsonImageRequest { string image_b64 = 1; }      // base64 string
+message ImageReply       { int32 width = 1; int32 height = 2; }
+
+message DotRequest { repeated double a = 1; repeated double b = 2; }
+message DotReply   { double dot = 1; }

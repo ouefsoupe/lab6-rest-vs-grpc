@@ -31,10 +31,27 @@ def doAdd(addr, debug=False):
         print(json.loads(response.text))
 
 def doDotProduct(addr, debug=False):
-    pass
+    headers = {'content-type': 'application/json'}
+    a = [random.random() for _ in range(100)]
+    b = [random.random() for _ in range(100)]
+    url = addr + "/api/dotproduct"
+    payload = {"a": a, "b": b}
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    if debug:
+        print("Response is", response)
+        print(json.loads(response.text))
 
 def doJsonImage(addr, debug=False):
-    pass
+    headers = {'content-type': 'application/json'}
+    with open('Flatirons_Winter_Sunrise_edit_2.jpg', 'rb') as f:
+        raw = f.read()
+    img_b64 = base64.b64encode(raw).decode('ascii')
+    url = addr + "/api/jsonimage"
+    payload = {"image": img_b64}
+    response = requests.post(url, headers=headers, data=json.dumps(payload))
+    if debug:
+        print("Response is", response)
+        print(json.loads(response.text))
 
 if len(sys.argv) < 3:
     print(f"Usage: {sys.argv[0]} <server ip> <cmd> <reps>")
@@ -45,7 +62,7 @@ host = sys.argv[1]
 cmd = sys.argv[2]
 reps = int(sys.argv[3])
 
-addr = f"http://{host}:5000"
+addr = f"http://{host}:5055"
 print(f"Running {reps} reps against {addr}")
 
 if cmd == 'rawImage':
