@@ -13,16 +13,20 @@ def bench(fn, reps):
 
 def main():
     ap = argparse.ArgumentParser()
+    # flag-style
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=50051)
     ap.add_argument("--reps", type=int, default=1000)
     ap.add_argument("--vec", type=int, default=100)
     ap.add_argument("--image", default="../Flatirons_Winter_Sunrise_edit_2.jpg")
     ap.add_argument("--which", choices=["add","rawimg","dot","jsonimg","all"], default="all")
-    
+    # positional-style (optional)
+    ap.add_argument("pos_host", nargs="?", help="host or host:port (positional)")
+    ap.add_argument("pos_cmd", nargs="?", help="add | rawImage | dotProduct | jsonImage (positional)")
+    ap.add_argument("pos_reps", nargs="?", type=int, help="repetitions (positional)")
     args = ap.parse_args()
 
-    # positional args, map them into flags
+    # If user used positional args, map them into flags
     if args.pos_host:
         h = args.pos_host
         if ":" in h:
